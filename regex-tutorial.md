@@ -23,9 +23,6 @@ In my regex tutorial, I will be describing matching an email:
 - [Grouping and Capturing](#grouping-and-capturing)
 - [Bracket Expressions](#bracket-expressions)
 - [Greedy and Lazy Match](#greedy-and-lazy-match)
-- [Boundaries](#boundaries)
-- [Back-references](#back-references)
-- [Look-ahead and Look-behind](#look-ahead-and-look-behind)
 
 </br>
 
@@ -67,11 +64,11 @@ To make this example more user-friendly, think of it in three groups:
 
 1. `+` : Matches 1 or more of the preceding token for an unlimited number of times. 
 
-    If we have an email address of `clifford_crowell@gmail.com`, the email address can be written as  `clifford_crowell.clifford_crowell@gmail.com` or `clifford_crowell.clifford_crowell.clifford_crowell@gmail.com` and the search will still recognize the repeating of tokens.
+    We have an email username validator of `/^([a-z0-9_\.-]+)@`. If we have an email address of `clifford_crowell@gmail.com`, the email address can be written as  `clifford_crowell.lex_luthor@gmail.com` or `superman_batman-wonderwoman@gmail.com` and the search will still recognize the repeating of tokens because the `+` quantifier is matching the entire set and will continue to match the entire set UP to the literal `@` sign. The username validator will then not validate the email domain and extension.
 
 2. `{}` : Matches the specified quantity of the previous token.
 
-    The string length will be determined by what is inside the curly braces `{}` cannot go outside of the bounds unless specified otherwise. For example, `{2,6}` means `less than 2 or more than 6` characters long. For an email extension, this means `username@domain.com` is acceptable because `3` characters long is within the upper and lower bounds. However, `username@domain.comcomcom` is not acceptable is `9` characters long is outside of the upper bound. If the bound is `{2,}`, this means there is only a lower bound of `2`. Then, this would accept `username@domain.comcomcom`. 
+    The string length will be determined by what is inside the curly braces `{}` cannot go outside of the limits unless specified otherwise. For example, `{2,6}` means `less than 2 or more than 6` characters long. For an email extension, this means `username@domain.com` is acceptable because `3` characters long is within the upper and lower limits. However, `username@domain.comcomcom` is not acceptable is `9` characters long is outside of the upper limit. If the limit is `{2,}`, this means there is only a lower limit of `2`. Then, this would accept `username@domain.comcomcom`. 
 
 </br>
 
@@ -101,17 +98,7 @@ To make this example more user-friendly, think of it in three groups:
 
 ### Greedy and Lazy Match
 
-</br>
-
-### Boundaries
-
-</br>
-
-### Back-references
-
-</br>
-
-### Look-ahead and Look-behind
+`+` and `{}` are both greedy and lazy matches. This is because both will match as many characters infinitely. Although `{}` can only do this should no upper limit exist, it will otherwise as many characters possible. 
 
 </br>
 
