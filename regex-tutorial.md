@@ -39,7 +39,7 @@ To make this example more user-friendly, think of it in three groups:
 
 1. Username: `/^([a-z0-9_\.-]+)@`
     
-    A username can accept values ranging from letters between `a-z`, numbers between `0-9`, the underscore `_` character, the period `.` character, and the hyphen `-` character. An example would be `clifford_crowell@emaildomain.extension`, or `clifford.crowell@emaildomain.extension`.
+    A username can accept values ranging from letters between `a-z`, numbers between `0-9`, the underscore `_` character, the period `.` character, and the hyphen `-` character. An example would be `clifford_crowell@domain.extension`, or `clifford.crowell@domain.extension`.
 
 2. Email domain: `([\da-z\.-]+)\.`
     
@@ -47,7 +47,7 @@ To make this example more user-friendly, think of it in three groups:
 
 3. Extension: `([a-z\.]{2,6})$/`
     
-    An extension can accept values ranging from letters between a-z and the period `.` character, and cannot be `less than 2 or more than 6` characters long. An example would be `username@emaildomain.com`.
+    An extension can accept values ranging from letters between a-z and the period `.` character, and cannot be `less than 2 or more than 6` characters long. An example would be `username@domain.com`.
 
 </br>
 
@@ -69,7 +69,9 @@ To make this example more user-friendly, think of it in three groups:
 
     If we have an email address of `clifford_crowell@gmail.com`, the email address can be written as  `clifford_crowell.clifford_crowell@gmail.com` or `clifford_crowell.clifford_crowell.clifford_crowell@gmail.com` and the search will still recognize the repeating of tokens.
 
-2. `{}` : 
+2. `{}` : Matches the specified quantity of the previous token.
+
+    The string length will be determined by what is inside the curly braces `{}` cannot go outside of the bounds unless specified otherwise. For example, `{2,6}` means `less than 2 or more than 6` characters long. For an email extension, this means `username@domain.com` is acceptable because `3` characters long is within the upper and lower bounds. However, `username@domain.comcomcom` is not acceptable is `9` characters long is outside of the upper bound. If the bound is `{2,}`, this means there is only a lower bound of `2`. Then, this would accept `username@domain.comcomcom`. 
 
 </br>
 
@@ -93,7 +95,7 @@ To make this example more user-friendly, think of it in three groups:
 
 1. `[]` : Match any character in the set.
 
-    Ex. `[a-z]` and `[0-9]` in the Username group means that the username may allow characters between letters a through z and numbers between 0 through 9 to be included in the username. This can also be applied to literals which is indicated with a forward slash `\`. For example, we can the following `([a-z0-9\.\+]+)` as an email username validator. In this example, we can match for `[a-z]` and `[0-9]`, but also the literal characters of `.` and `+`. So, an email could like look `clifford.97@emaildomain.extension` and all characters will be matched. 
+    Ex. `[a-z]` and `[0-9]` in the Username group means that the username may allow characters between letters a through z and numbers between 0 through 9 to be included in the username. This can also be applied to literals which is indicated with a forward slash `\`. For example, we can the following `([a-z0-9\.\+]+)` as an email username validator. In this example, we can match for `[a-z]` and `[0-9]`, but also the literal characters of `.` and `+`. So, an email could like look `clifford.97@domain.extension` and all characters will be matched. 
 
 </br>
 
